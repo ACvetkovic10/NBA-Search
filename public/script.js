@@ -1,9 +1,10 @@
+console.log("1");
 document.addEventListener('DOMContentLoaded', () => {
     fetch('../data.json')
       .then(response => response.json())
       .then(data => {
         const playerTable = document.getElementById('playerTable');
-  
+        console.log("1");
         data.forEach((player, index) => {
           const row = playerTable.insertRow();
           const rankCell = row.insertCell(0);
