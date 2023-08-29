@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         moreButtons.forEach((button, index) => {
           button.addEventListener('click', () => {
-            const playerData = data[index]; // Assuming your data array is named 'data'
+            const playerData = data[index]; 
             displayPopup(playerData);
           });
         });
@@ -52,20 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const popupContent = document.createElement('div');
     popupContent.classList.add('popup-content');
   
-    // Create separate containers for image and data
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('image-container');
     const dataContainer = document.createElement('div');
     dataContainer.classList.add('data-container');
   
-    // Add player image to the image container
     const playerImage = document.createElement('img');
     playerImage.src = playerData.image;
     playerImage.alt = 'Player Image';
     imageContainer.appendChild(playerImage);
     
     
-    // Populate data container with player data
     dataContainer.innerHTML = `
       <p>Name: ${playerData.name}</p>
       <p>Standing: ${playerData.standings}</p>
@@ -77,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- Add more data as needed -->
     `;
   
-    // Append containers to the pop-up content
     popupContent.appendChild(imageContainer);
     popupContent.appendChild(dataContainer);
   
