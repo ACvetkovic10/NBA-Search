@@ -1,6 +1,6 @@
 console.log("1");
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('../data.json')
+    fetch('data.json')
       .then(response => response.json())
       .then(data => {
         const playerTable = document.getElementById('playerTable');
