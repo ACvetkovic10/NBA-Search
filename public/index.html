@@ -5,14 +5,16 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+  <!-- Navigacija -->
   <div id="nav">
   <nav>
+    <!-- Naslov -->
     <div>
       <h1>
           Top 10 NBA Players 
       </h1>
     </div>
-
+    <!-- Pretrazivac -->
     <div className="App">
       <form id="searchPlayerStats">
         <label>
@@ -33,7 +35,7 @@
       </div>
      </div>
     <div id="menu-button">☰</div>
-
+     <!-- Meni -->
     <div id="menu-container">
         <div id="login-form">
             <h1>Login</h1>
@@ -49,7 +51,7 @@
     </div>
   </div>
   </nav>
- 
+  <!-- Tabela za igrace -->
     <table id="playerTable">
       <thead>
         <tr>
@@ -71,12 +73,12 @@
       </tbody>
       
       </table>
-
+      <!-- Logout taster -->
       <button id="log-out-button" class="log-out-button">Log Out</button>
       <div id="add-player-container">
         <h2>Add Player</h2>
       <button id="add-player-button" class="blue-button">Add Player</button>
-
+        <!-- Forma za dodavanje igraca -->
         <form id="add-player-form">
             <label for="player-name">Name:</label>
             <input type="text" id="player_Name" name="player-name" ><br>
