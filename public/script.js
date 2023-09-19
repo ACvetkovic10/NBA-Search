@@ -4,7 +4,7 @@ const appState = {
   data: [],
 };
 
-// Funkcija stanje login-a
+// Funkcija stanja login-a
 function handleLoggedInState() {
   const addPlayerContainer = document.getElementById('add-player-container');
   const logOutButton = document.getElementById('log-out-button');
@@ -23,7 +23,7 @@ function createDeleteButton(row, index) {
   });
   return deleteButton;
 }
-// Funkcija dodavanje igracha na tabeli
+// Funkcija dodavanja igraca na tabeli
 function populatePlayerTable() {
   const playerTable = document.getElementById('playerTable');
   playerTable.innerHTML = '';
@@ -86,7 +86,7 @@ function populatePlayerTable() {
   });
 }
 
-// Funkcija uchitavanje 
+// Funkcija uchitavanja 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const response = await fetch('data.json');
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchedAssists = document.getElementById('searchedAssists');
   const searchedPoints = document.getElementById('searchedPoints');
 
-  // Funckija za pretrazhivanje
+  // Funkcija za pretrazivanje
   searchPlayersStats.addEventListener('submit', async (e) => {
     e.preventDefault();
   
@@ -137,13 +137,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching data:', error);
       });
     };
-    // Funkcija otstranivanje praznih mesta
+    // Funkcija zauklanjanje praznih mesta
     function removeSpace(searchedName) {
       const replace = searchedName.split(" ").join("_");
       return replace;
     }
 
-// Funkcija uchitavanja podataka o igracha 
+// Funkcija ucitavanja podataka o igracu
 const getPlayerStats = (playerID) => {
   const apiUrl = `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerID}&player_ids[]=${playerID}`;
   let setState;
@@ -199,7 +199,7 @@ logOutButton.addEventListener('click', async (e) => {
   logOutButton.style.display = 'none';
   addPlayerContainer.style.display = 'none';
 });
-// Funkcija za dodavanje osnovnih informacija novi igracha
+// Funkcija za dodavanje osnovnih informacija novih igraca
 addPlayerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -248,7 +248,7 @@ addPlayerForm.addEventListener('submit', async (e) => {
 const addPlayerContainer = document.getElementById('add-player-container');
 });
 
-// Funcija za azuriranje tabele
+// Funkcija za azuriranje tabele
 
 function updateTable() {
   const playerTable = document.getElementById('playerTable');
