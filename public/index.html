@@ -5,13 +5,54 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+  <div id="nav">
+  <nav>
     <div>
-        <h1>
-            Top 10 NBA Players 
-        </h1>
+      <h1>
+          Top 10 NBA Players 
+      </h1>
     </div>
+
+    <div className="App">
+      <form id="searchPlayerStats">
+        <label>
+          Name
+          <input 
+           type="text"
+           placeholder="please enter players name"
+           id="player-name"
+          />
+        </label>
+        <input type="submit" value="Submit"/>
+      </form>
+      <div id="searchedPlayerStats">
+        <span id="searchedGames">Games player:</span>
+        <span id="searchedPoints">Points average:</span>
+        <span id="searchedRebounds">Rebounds average:</span>
+        <span id="searchedAssists">Assists average:</span>
+      </div>
+     </div>
+    <div id="menu-button">☰</div>
+
+    <div id="menu-container">
+        <div id="login-form">
+            <h1>Login</h1>
+            <form id="login-formm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br>
+                <button type="submit">Log in</button>
+            </form>
+            <button type="submit" id="logOutButton">Log out</button>
+        </div>
+    </div>
+  </div>
+  </nav>
+ 
     <table id="playerTable">
-        <tr class="player-row">
+      <thead>
+        <tr>
           <th>Rank</th>
           <th>Name</th>
           <th>Position</th>
@@ -22,8 +63,56 @@
           <th>Assists Average</th>
           <th>ESPN Rating</th>
         </tr>
-      </table>
+      </thead>  
+      <tbody>
+        <tr class="player-row">
+   
+        </tr>
+      </tbody>
       
-<script src="script.js"></script>
+      </table>
+      <!-- Add this button for the hamburger menu -->
+   
+
+      <button id="log-out-button" class="log-out-button">Log Out</button>
+      <div id="add-player-container">
+        <h2>Add Player</h2>
+      <button id="add-player-button" class="blue-button">Add Player</button>
+
+        <form id="add-player-form">
+            <label for="player-name">Name:</label>
+            <input type="text" id="player-name" name="player-name" ><br>
+            <label for="player-name">Quote:</label>
+            <input type="text" id="playerQuote" name="player-quote" ><br>
+            <label for="playerPosition">Player position:</label>
+            <input type="text" id="playerPosition" name="playerPosition" ><br>
+            <label for="playerTeam">Player team:</label>
+            <input type="text" id="playerTeam" name="playerTeam" ><br>
+            <label for="playerGames">Player games:</label>
+            <input type="text" id="playerGames" name="playerGames" ><br>
+            <label for="pointsAverage">Points Average:</label>
+            <input type="text" id="pointsAverage" name="pointsAverage" ><br>
+            <label for="reboundsAverage">Rebounds Average:</label>
+            <input type="text" id="reboundsAverage" name="reboundsAverage" ><br>
+            <label for="assistsAverage">Assists average:</label>
+            <input type="text" id="assistsAverage" name="assistsAverage" ><br>
+            <label for="espn_ratings">ESPN ratings:</label>
+            <input type="text" id="espnRatings" name="espn_ratings" ><br>
+            <label for="height">Height:</label>
+            <input type="text" id="height" name="height" ><br>
+            <label for="weight">Weight:</label>
+            <input type="text" id="weight" name="weight" ><br>
+            <label for="birthdate">Birthdate:</label>
+            <input type="text" id="birthdate" name="birthdate" ><br>
+            <label for="image">Image:</label>
+            <input type="text" id="Image" name="Image" ><br>
+
+            <button type="submit">Submit</button>
+
+        </form>
+        
+    </div>
+   
+      <script src="script.js"></script>
 </body>
 </html>
