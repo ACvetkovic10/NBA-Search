@@ -11,7 +11,6 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-// Sample user data (replace with a database in a real project)
 const users = [
     { id: 1, username: 'admin', password: 'admin' },
     { id: 2, username: 'user', password: 'user' },

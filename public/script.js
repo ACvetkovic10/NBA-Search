@@ -1,5 +1,3 @@
-// Define an object to manage the app state
-// import axios from 'axios';
 const appState = {
   isLoggedIn: false,
   data: [],
@@ -8,38 +6,34 @@ const appState = {
 
 function handleLoggedInState() {
   const addPlayerContainer = document.getElementById('add-player-container');
-  const logOutButton = document.getElementById('log-out-button'); // Add this line
+  const logOutButton = document.getElementById('log-out-button');
 
   if (appState.isLoggedIn) {
     addPlayerContainer.style.display = 'block';
-    logOutButton.style.display = 'block'; // Show the Log Out button
+    logOutButton.style.display = 'block';
   } else {
     addPlayerContainer.style.display = 'none';
-    logOutButton.style.display = 'none'; // Hide the Log Out button
+    logOutButton.style.display = 'none';
   }
 }
-// Function to create a delete button for a row
 function createDeleteButton(row, index) {
   const deleteButton = document.createElement('button');
   deleteButton.textContent = 'Delete...';
   deleteButton.classList.add('delete-button');
   deleteButton.addEventListener('click', () => {
-    // Handle row deletion here
-    appState.data.splice(index, 1); // Remove the corresponding data entry
-    row.remove(); // Remove the row from the table
+    appState.data.splice(index, 1); 
+    row.remove();
   });
   return deleteButton;
 }
 
-// Function to populate the player table
 function populatePlayerTable() {
   const playerTable = document.getElementById('playerTable');
-  playerTable.innerHTML = ''; // Clear the table
+  playerTable.innerHTML = '';
 
-  // Create a table header row
   const headerRow = playerTable.insertRow();
   const headers = [
-    'Rank', // Add more headers for each column
+    'Rank', 
     'Name',
     'Position',
     'Team',
@@ -58,7 +52,7 @@ function populatePlayerTable() {
   appState.data.forEach((player, index) => {
     const row = playerTable.insertRow();
     const cells = [
-      index + 1, // Rank
+      index + 1, 
       player.name,
       player.position,
       player.team,
@@ -127,21 +121,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   searchPlayersStats.addEventListener('submit', async (e) => {
     e.preventDefault();
   
-    // Get the user's input from the form
     let searchedName = document.getElementById('player-name').value.trim();
     
     searchedName = removeSpace(searchedName);
-    // Check if the user provided a player name
     if (!searchedName) {
-      // Handle the case where the input is empty or invalid
       alert('Please enter a valid player name.');
       return;
     }
     const getPlayerId = (playerName) => {
-      // Construct the API URL with the player name as a query parameter
       const apiUrl = `https://www.balldontlie.io/api/v1/players?search=${playerName}`;
     
-      // Make the API request using the fetch function
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -150,12 +139,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         return response.json();
       })
       .then((data) => {
-        // Process and use the fetched data here
         getPlayerStats(data.data[0].id);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        // Handle the error here (e.g., show an error message to the user)
       });
     };
     function removeSpace(searchedName) {
@@ -165,10 +152,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log(getPlayerId(searchedName));
 
     const getPlayerStats = (playerID) => {
-      // Construct the API URL with the desired parameters
       const apiUrl = `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerID}&player_ids[]=${playerID}`;
       let setState;
-      // Make the API request using the fetch function
       fetch(apiUrl)
         .then((response) => {
           if (!response.ok) {
@@ -178,9 +163,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           return response.json();
         })
         .then((data) => {
-          // Process and use the fetched data here
-          // searchedGames.innerHTML += data.data.
-          // searchedGames.innerHTML += data.data.games_played;
+        
           console.log(data.data);
           searchedGames.innerHTML += data.data[0].games_played;
           searchedPoints.innerHTML += data.data[0].pts;
@@ -189,11 +172,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
-          // Handle the error here (e.g., show an error message to the user)
         });
     };
-    
-    // console.log(getPlayerStats());
   });
 
   if(!appState.isLoggedIn){
@@ -228,14 +208,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 addPlayerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Check if the user is logged in before allowing the submission
   if (!appState.isLoggedIn) {
-    // Display a message or redirect to the login page
     alert('You must be logged in to add a player.');
     return;
   }
 
-  // Get input values from the form
   const playerName = document.getElementById('player-name').value;
   const playerQuote = document.getElementById('playerQuote').value;
   const playerPosition = document.getElementById('playerPosition').value;
@@ -250,9 +227,8 @@ addPlayerForm.addEventListener('submit', async (e) => {
   const birthdate = document.getElementById('birthdate').value;
   const imageUrl = document.getElementById('Image').value;
 
-  // Create a new player object
   const newPlayer = {
-    image: imageUrl, // Add image URL here if available
+    image: imageUrl,
     name: playerName,
     quote: playerQuote,
     position: playerPosition,
@@ -267,28 +243,21 @@ addPlayerForm.addEventListener('submit', async (e) => {
     birthdate: birthdate
   };
 
-  // Add the new player to the data array
   appState.data.push(newPlayer);
 
-  // Update the data.json file (you'll need a server-side script for this)
-  // For simplicity, we'll just update the table for now
+  
   populatePlayerTable();
 
-  // Clear the form fields
   addPlayerForm.reset();
 
-  // Hide the add player form
   const addPlayerContainer = document.getElementById('add-player-container');
 });
 
     function updateTable() {
-      // Clear the current table
       const playerTable = document.getElementById('playerTable');
       playerTable.innerHTML = '';
 
-      // Repopulate the table with updated data
       data.forEach((player, index) => {
-          // ... (your existing code for populating the table)
       });
   }
   
