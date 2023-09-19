@@ -1,21 +1,18 @@
+// Deklaracija promenljive
 const appState = {
   isLoggedIn: false,
   data: [],
 };
 
-
+// Funkcija stanje login-a
 function handleLoggedInState() {
   const addPlayerContainer = document.getElementById('add-player-container');
   const logOutButton = document.getElementById('log-out-button');
-
-  if (appState.isLoggedIn) {
-    addPlayerContainer.style.display = 'block';
-    logOutButton.style.display = 'block';
-  } else {
-    addPlayerContainer.style.display = 'none';
-    logOutButton.style.display = 'none';
-  }
+  addPlayerContainer.style.display = appState.isLoggedIn ? 'block' : 'none';
 }
+
+
+// Funkcija kreiranja delete tastera
 function createDeleteButton(row, index) {
   const deleteButton = document.createElement('button');
   deleteButton.textContent = 'Delete...';
@@ -26,7 +23,7 @@ function createDeleteButton(row, index) {
   });
   return deleteButton;
 }
-
+// Funkcija dodavanje igracha na tabeli
 function populatePlayerTable() {
   const playerTable = document.getElementById('playerTable');
   playerTable.innerHTML = '';
@@ -60,7 +57,7 @@ function populatePlayerTable() {
       player.points_average,
       player.rebounds_average,
       player.assists_average,
-      player.espn_ratings,
+      player.espn_ratin,
     ];
 
     cells.forEach((cellData) => {
@@ -89,11 +86,7 @@ function populatePlayerTable() {
   });
 }
 
-function handleLoggedInState() {
-  const addPlayerContainer = document.getElementById('add-player-container');
-  addPlayerContainer.style.display = appState.isLoggedIn ? 'block' : 'none';
-}
-
+// Funkcija uchitavanje 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const response = await fetch('data.json');
@@ -116,6 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchedAssists = document.getElementById('searchedAssists');
   const searchedPoints = document.getElementById('searchedPoints');
 
+  // Funckija za pretrazhivanje
   searchPlayersStats.addEventListener('submit', async (e) => {
     e.preventDefault();
   
@@ -143,66 +137,69 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching data:', error);
       });
     };
+    // Funkcija otstranivanje praznih mesta
     function removeSpace(searchedName) {
       const replace = searchedName.split(" ").join("_");
       return replace;
     }
-    console.log(getPlayerId(searchedName));
 
-    const getPlayerStats = (playerID) => {
-      const apiUrl = `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerID}&player_ids[]=${playerID}`;
-      let setState;
-      fetch(apiUrl)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          
-          return response.json();
-        })
-        .then((data) => {
-        
-          console.log(data.data);
-          searchedGames.innerHTML += data.data[0].games_played;
-          searchedPoints.innerHTML += data.data[0].pts;
-          searchedRebounds.innerHTML += data.data[0].reb;
-          searchedAssists.innerHTML += data.data[0].ast;
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    };
-  });
-
+// Funkcija uchitavanja podataka o igracha 
+const getPlayerStats = (playerID) => {
+  const apiUrl = `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerID}&player_ids[]=${playerID}`;
+  let setState;
+  fetch(apiUrl)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+      return response.json();
+    })
+    .then((data) => {
+    
+      console.log(data.data);
+      searchedGames.innerHTML += data.data[0].games_played;
+      searchedPoints.innerHTML += data.data[0].pts;
+      searchedRebounds.innerHTML += data.data[0].reb;
+      searchedAssists.innerHTML += data.data[0].ast;
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+  };
+});
+// Ako korisnik nije ulogovan ukloni taster
   if(!appState.isLoggedIn){
     logOutButton.style.display = 'none';
   }
-  menuButton.addEventListener('click', () => {
-    menuContainer.style.display = menuContainer.style.display === 'block' ? 'none' : 'block';
-  });
-
-  loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-   if(username === 'admin' && password === 'admin') {
-        appState.isLoggedIn = true;
-        handleLoggedInState();
-        menuContainer.style.display = 'none';
-        if(appState.isLoggedIn){
-          logOutButton.style.display = 'block';
-          loginFormm.style.display = 'none';
-        }
-      }
-  });
-  logOutButton.addEventListener('click', async (e) => {
-    appState.isLoggedIn = false;
+// Funkcija za menu taster
+menuButton.addEventListener('click', () => {
+  menuContainer.style.display = menuContainer.style.display === 'block' ? 'none' : 'block';
+});
+// Funkcija za login
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  if(username === 'admin' && password === 'admin') {
+    appState.isLoggedIn = true;
+    handleLoggedInState();
     menuContainer.style.display = 'none';
-    loginFormm.style.display = 'block';
-    logOutButton.style.display = 'none';
-    addPlayerContainer.style.display = 'none';
-  });
-
+    if(appState.isLoggedIn){
+      logOutButton.style.display = 'block';
+      loginFormm.style.display = 'none';
+    }
+  }
+});
+// Funkcija za logout
+logOutButton.addEventListener('click', async (e) => {
+  appState.isLoggedIn = false;
+  menuContainer.style.display = 'none';
+  loginFormm.style.display = 'block';
+  logOutButton.style.display = 'none';
+  addPlayerContainer.style.display = 'none';
+});
+// Funkcija za dodavanje osnovnih informacija novi igracha
 addPlayerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -243,65 +240,66 @@ addPlayerForm.addEventListener('submit', async (e) => {
   console.log(espnRatings)
   appState.data.push(newPlayer);
 
-  
+
   populatePlayerTable();
 
   addPlayerForm.reset();
 
-  const addPlayerContainer = document.getElementById('add-player-container');
+const addPlayerContainer = document.getElementById('add-player-container');
 });
 
-    function updateTable() {
-      const playerTable = document.getElementById('playerTable');
-      playerTable.innerHTML = '';
+// Funcija za azuriranje tabele
 
-      data.forEach((player, index) => {
-      });
-  }
-  
+function updateTable() {
+  const playerTable = document.getElementById('playerTable');
+  playerTable.innerHTML = '';
+
+  data.forEach((player, index) => {});
+}
+
 });
 
+// Funkcija za pokazivanje pop up prozora
 
+function displayPopup(playerData) {
+  const popupContainer = document.createElement('div');
+  popupContainer.classList.add('popup-container');
 
-  function displayPopup(playerData) {
-    const popupContainer = document.createElement('div');
-    popupContainer.classList.add('popup-container');
+  const popupContent = document.createElement('div');
+  popupContent.classList.add('popup-content');
+
+  const imageContainer = document.createElement('div');
+  imageContainer.classList.add('image-container');
+  const dataContainer = document.createElement('div');
+  dataContainer.classList.add('data-container');
+
+  const playerImage = document.createElement('img');
+  playerImage.src = playerData.image;
+  playerImage.alt = 'Player Image';
+  imageContainer.appendChild(playerImage);
   
-    const popupContent = document.createElement('div');
-    popupContent.classList.add('popup-content');
   
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add('image-container');
-    const dataContainer = document.createElement('div');
-    dataContainer.classList.add('data-container');
+  dataContainer.innerHTML = `
+    <p>Name: ${playerData.name}</p>
+    <p>Standing: ${playerData.standings}</p>
+    <p>Position: ${playerData.position}</p>
+    <p>Team: ${playerData.team_fullname}</p>
+    <p>Height: ${playerData.height}</p>
+    <p>Weight: ${playerData.weight}</p>
+    <p>Birthdate: ${playerData.birthdate}</p>
+    <!-- Add more data as needed -->
+  `;
+
+  popupContent.appendChild(imageContainer);
+  popupContent.appendChild(dataContainer);
+
+  popupContainer.appendChild(popupContent);
+  document.body.appendChild(popupContainer)
   
-    const playerImage = document.createElement('img');
-    playerImage.src = playerData.image;
-    playerImage.alt = 'Player Image';
-    imageContainer.appendChild(playerImage);
-    
-    
-    dataContainer.innerHTML = `
-      <p>Name: ${playerData.name}</p>
-      <p>Standing: ${playerData.standings}</p>
-      <p>Position: ${playerData.position}</p>
-      <p>Team: ${playerData.team_fullname}</p>
-      <p>Height: ${playerData.height}</p>
-      <p>Weight: ${playerData.weight}</p>
-      <p>Birthdate: ${playerData.birthdate}</p>
-      <!-- Add more data as needed -->
-    `;
-  
-    popupContent.appendChild(imageContainer);
-    popupContent.appendChild(dataContainer);
-  
-    popupContainer.appendChild(popupContent);
-    document.body.appendChild(popupContainer)
-    
-    popupContainer.addEventListener('click', (event) => {
-        if (event.target === popupContainer) {
-          document.body.removeChild(popupContainer);
-        }
-    });
-  }
-  populatePlayerTable();
+  popupContainer.addEventListener('click', (event) => {
+      if (event.target === popupContainer) {
+        document.body.removeChild(popupContainer);
+      }
+  });
+}
+populatePlayerTable();
