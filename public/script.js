@@ -60,7 +60,7 @@ function populatePlayerTable() {
       player.points_average,
       player.rebounds_average,
       player.assists_average,
-      player.espn_ratin,
+      player.espn_ratings,
     ];
 
     cells.forEach((cellData) => {
@@ -68,7 +68,6 @@ function populatePlayerTable() {
       cell.textContent = cellData;
     });
 
-    // Add More button
     const moreButton = document.createElement('button');
     moreButton.textContent = 'More...';
     moreButton.classList.add('more-button');
@@ -79,7 +78,7 @@ function populatePlayerTable() {
     moreCell.appendChild(moreButton);
 
     if (appState.isLoggedIn) {
-      // Add Delete button
+
       const deleteButton = createDeleteButton(row, index);
       const deleteCell = row.insertCell();
       deleteCell.appendChild(deleteButton);
@@ -90,7 +89,6 @@ function populatePlayerTable() {
   });
 }
 
-// Function to handle logged-in state changes
 function handleLoggedInState() {
   const addPlayerContainer = document.getElementById('add-player-container');
   addPlayerContainer.style.display = appState.isLoggedIn ? 'block' : 'none';
@@ -213,7 +211,7 @@ addPlayerForm.addEventListener('submit', async (e) => {
     return;
   }
 
-  const playerName = document.getElementById('player-name').value;
+  const playerName = document.getElementById('player_Name').value;
   const playerQuote = document.getElementById('playerQuote').value;
   const playerPosition = document.getElementById('playerPosition').value;
   const playerTeam = document.getElementById('playerTeam').value;
@@ -242,7 +240,7 @@ addPlayerForm.addEventListener('submit', async (e) => {
     weight: weight,
     birthdate: birthdate
   };
-
+  console.log(espnRatings)
   appState.data.push(newPlayer);
 
   
