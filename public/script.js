@@ -57,7 +57,7 @@ function populatePlayerTable() {
       player.points_average,
       player.rebounds_average,
       player.assists_average,
-      player.espn_ratin,
+      player.espn_ratining,
     ];
 
     cells.forEach((cellData) => {
@@ -232,7 +232,7 @@ addPlayerForm.addEventListener('submit', async (e) => {
     points_average: pointsAverage,
     rebounds_average: reboundsAverage,
     assists_average: assistsAverage,
-    espn_ratings: espnRatings,
+    espn_ratining: espnRatings,
     height: height,
     weight: weight,
     birthdate: birthdate
