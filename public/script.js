@@ -207,19 +207,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    
-    try {
-      const response = await fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
+   if(username === 'admin' && password === 'admin') {
         appState.isLoggedIn = true;
         handleLoggedInState();
         menuContainer.style.display = 'none';
@@ -227,12 +215,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           logOutButton.style.display = 'block';
           loginFormm.style.display = 'none';
         }
-      } else {
-        alert(data.message);
       }
-    } catch (error) {
-      console.error('Error:', error);
-    }
   });
   logOutButton.addEventListener('click', async (e) => {
     appState.isLoggedIn = false;
