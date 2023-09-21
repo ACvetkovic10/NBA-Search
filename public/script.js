@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
  
 
   // Funkcija za pretrazivanje
-  searchPlayersStats.addEventListener('click', async (e) => {
+  searchPlayersStats.addEventListener('submit', async (e) => {
     e.preventDefault();
     console.log(1);
     let searchedName = document.getElementById('player-name').value.trim();
