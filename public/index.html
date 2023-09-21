@@ -25,26 +25,29 @@
            id="player-name"
           />
         </label>
-        <input type="submit" value="Submit"/>
+        <input type="submit" id="submitSearchButton"value="Submit"/>
       </form>
       <div id="searchedPlayerStats">
-        <span id="searchedGames">Games player:</span>
+        <span id="searchedGames">Games played:</span>
         <span id="searchedPoints">Points average:</span>
         <span id="searchedRebounds">Rebounds average:</span>
         <span id="searchedAssists">Assists average:</span>
       </div>
      </div>
-    <div id="menu-button">☰</div>
+     <!-- ☰ -->
+    <div id="menu-button">Sign in</div>
      <!-- Meni -->
+
     <div id="menu-container">
         <div id="login-form">
             <h1>Login</h1>
+            <button id="close-login-button" class="close-button">X</button>
             <form id="login-formm">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required><br>
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required><br>
-                <button type="submit">Log in</button>
+                <button type="submit" id="logInButton">Log in</button>
             </form>
             <button type="submit" id="logOutButton">Log out</button>
         </div>
@@ -77,8 +80,9 @@
       <button id="log-out-button" class="log-out-button">Log Out</button>
       <div id="add-player-container">
         <h2>Add Player</h2>
-      <button id="add-player-button" class="blue-button">Add Player</button>
         <!-- Forma za dodavanje igraca -->
+        <button type="button" class="close-add" id="close-add-button">X</button>
+
         <form id="add-player-form">
             <label for="player-name">Name:</label>
             <input type="text" id="player_Name" name="player-name" ><br>
@@ -104,10 +108,8 @@
             <input type="text" id="weight" name="weight" ><br>
             <label for="birthdate">Birthdate:</label>
             <input type="text" id="birthdate" name="birthdate" ><br>
-            <label for="image">Image:</label>
-            <input type="text" id="Image" name="Image" ><br>
 
-            <button type="submit">Submit</button>
+            <button type="submit">Add player</button>
 
         </form>
         

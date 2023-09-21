@@ -18,6 +18,7 @@ function createDeleteButton(row, index) {
   deleteButton.textContent = 'Delete...';
   deleteButton.classList.add('delete-button');
   deleteButton.addEventListener('click', () => {
+    confirm(`Da li ste sigurni da zelite da uklonite igraca ?`)
     appState.data.splice(index, 1); 
     row.remove();
   });
@@ -108,11 +109,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchedRebounds = document.getElementById('searchedRebounds');
   const searchedAssists = document.getElementById('searchedAssists');
   const searchedPoints = document.getElementById('searchedPoints');
+  const closeLoginButton = document.getElementById('close-login-button');
+  const closePlayerForm = document.getElementById('close-add-button');
+ 
 
   // Funkcija za pretrazivanje
-  searchPlayersStats.addEventListener('submit', async (e) => {
+  searchPlayersStats.addEventListener('click', async (e) => {
     e.preventDefault();
-  
+    console.log(1);
     let searchedName = document.getElementById('player-name').value.trim();
     
     searchedName = removeSpace(searchedName);
@@ -128,23 +132,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
+        console.log(2);
+
         return response.json();
+
       })
       .then((data) => {
         getPlayerStats(data.data[0].id);
+        console.log(2);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
     };
+
     // Funkcija zauklanjanje praznih mesta
     function removeSpace(searchedName) {
       const replace = searchedName.split(" ").join("_");
       return replace;
-    }
+    } 
 
 // Funkcija ucitavanja podataka o igracu
-const getPlayerStats = (playerID) => {
+  const getPlayerStats = (playerID) => {
   const apiUrl = `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerID}&player_ids[]=${playerID}`;
   let setState;
   fetch(apiUrl)
@@ -156,7 +165,10 @@ const getPlayerStats = (playerID) => {
       return response.json();
     })
     .then((data) => {
-    
+      searchedGames.innerHTML = "Games played:";
+      searchedPoints.innerHTML = "Points average:";
+      searchedRebounds.innerHTML = "Rebounds average:";
+      searchedAssists.innerHTML = "Assists average:";
       console.log(data.data);
       searchedGames.innerHTML += data.data[0].games_played;
       searchedPoints.innerHTML += data.data[0].pts;
@@ -167,6 +179,8 @@ const getPlayerStats = (playerID) => {
       console.error('Error fetching data:', error);
     });
   };
+  getPlayerId(searchedName);
+
 });
 // Ako korisnik nije ulogovan ukloni taster
   if(!appState.isLoggedIn){
@@ -174,6 +188,13 @@ const getPlayerStats = (playerID) => {
   }
 // Funkcija za menu taster
 menuButton.addEventListener('click', () => {
+  menuContainer.style.display = menuContainer.style.display === 'block' ? 'none' : 'block';
+});
+
+closePlayerForm.addEventListener('click', () => {
+  addPlayerContainer.style.display = 'none';
+});
+ closeLoginButton.addEventListener('click', () => {
   menuContainer.style.display = menuContainer.style.display === 'block' ? 'none' : 'block';
 });
 // Funkcija za login
@@ -202,6 +223,7 @@ logOutButton.addEventListener('click', async (e) => {
 // Funkcija za dodavanje osnovnih informacija novih igraca
 addPlayerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  confirm(`Da li ste sigurni da zelite da dodate igraca ?`)
 
   if (!appState.isLoggedIn) {
     alert('You must be logged in to add a player.');
@@ -220,10 +242,8 @@ addPlayerForm.addEventListener('submit', async (e) => {
   const height = document.getElementById('height').value;
   const weight = document.getElementById('weight').value;
   const birthdate = document.getElementById('birthdate').value;
-  const imageUrl = document.getElementById('Image').value;
-
+ 
   const newPlayer = {
-    image: imageUrl,
     name: playerName,
     quote: playerQuote,
     position: playerPosition,

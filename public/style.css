@@ -2,7 +2,8 @@ body {
     background-image: url('./images/pexels-markus-spiske-1752757.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
+    height: 150vh;
 }
 
 nav {
@@ -69,6 +70,55 @@ text-align: center;
 }
 th{
     background-color: gainsboro;
+}
+.close-button {
+  margin-top: 10px; 
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+.close-button {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #333; /* Color of the "X" */
+  outline: none;
+}
+
+.close-button:hover {
+  color: red; /* Change color on hover if desired */
+}
+.close-add {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #333; /* Color of the "X" */
+  outline: none;
+  float: right;
+  margin-top: -40px;
+
+}
+
+.close-add:hover {
+  color: red; /* Change color on hover if desired */
 }
 .menu {
   display: none;
@@ -166,16 +216,7 @@ display: flex;
     padding: 10px; 
 }
 
-.close-button {
-    margin-top: 10px; 
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
 
-}
 
 #menu-button {
   cursor: pointer;
@@ -230,7 +271,7 @@ display: flex;
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-#menu-container button {
+#menu-container #logInButton {
   background-color: #04AA6D;
   color: white;
   padding: 14px 20px;
@@ -239,11 +280,20 @@ display: flex;
   cursor: pointer;
   width: 100%;
 }
+#menu-container #logOutButton {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  margin-top: 100px;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+}
 #add-player-container{
   display: none;
   background-color: white;
   width: 50%;
-  height: 10%;
   text-align: center;
   margin: 0 auto;
 }
