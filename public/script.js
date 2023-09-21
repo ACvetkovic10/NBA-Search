@@ -75,14 +75,9 @@ function populatePlayerTable() {
     const moreCell = row.insertCell();
     moreCell.appendChild(moreButton);
 
-    if (appState.isLoggedIn) {
-
-      const deleteButton = createDeleteButton(row, index);
-      const deleteCell = row.insertCell();
-      deleteCell.appendChild(deleteButton);
-    } else if(!appState.isLoggedIn){
-      
-    }
+    const deleteButton = createDeleteButton(row, index);
+    const deleteCell = row.insertCell();
+    deleteCell.appendChild(deleteButton);
     
   });
 }
