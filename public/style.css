@@ -77,16 +77,12 @@ th{
   background-color: transparent;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
   cursor: pointer;
 
 }
 .close-button {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  top: 0;
+  top: 0px;
   right: 10px;
   width: 30px;
   height: 30px;
