@@ -18,9 +18,10 @@ function createDeleteButton(row, index) {
   deleteButton.textContent = 'Delete...';
   deleteButton.classList.add('delete-button');
   deleteButton.addEventListener('click', () => {
-    confirm(`Da li ste sigurni da zelite da uklonite igraca ?`)
-    appState.data.splice(index, 1); 
-    row.remove();
+    if( confirm(`Da li ste sigurni da zelite da uklonite igraca ?`)){
+       appState.data.splice(index, 1); 
+       row.remove();
+    }
   });
   return deleteButton;
 }
@@ -218,13 +219,15 @@ logOutButton.addEventListener('click', async (e) => {
 // Funkcija za dodavanje osnovnih informacija novih igraca
 addPlayerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  confirm(`Da li ste sigurni da zelite da dodate igraca ?`)
+  if(confirm(`Da li ste sigurni da zelite da dodate igraca ?`)){
+ 
 
   if (!appState.isLoggedIn) {
     alert('You must be logged in to add a player.');
     return;
   }
 
+  const addPlayerContainer = document.getElementById('add-player-container');
   const playerName = document.getElementById('player_Name').value;
   const playerQuote = document.getElementById('playerQuote').value;
   const playerPosition = document.getElementById('playerPosition').value;
@@ -260,7 +263,7 @@ addPlayerForm.addEventListener('submit', async (e) => {
 
   addPlayerForm.reset();
 
-const addPlayerContainer = document.getElementById('add-player-container');
+  }
 });
 
 // Funkcija za azuriranje tabele
