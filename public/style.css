@@ -271,6 +271,10 @@ display: flex;
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
+#login-formm label{
+  color: black;
+  float: left;
+}
 #menu-container #logInButton {
   background-color: #04AA6D;
   color: white;
