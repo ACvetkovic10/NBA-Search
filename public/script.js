@@ -292,13 +292,16 @@ function displayPopup(playerData) {
   imageContainer.classList.add('image-container');
   const dataContainer = document.createElement('div');
   dataContainer.classList.add('data-container');
+  
+  const closePopup= document.createElement('button');
+  closePopup.classList.add('close-popup'); 
 
   const playerImage = document.createElement('img');
   playerImage.src = playerData.image;
   playerImage.alt = 'Player Image';
   imageContainer.appendChild(playerImage);
   
-  
+ 
   dataContainer.innerHTML = `
     <p>Name: ${playerData.name}</p>
     <p>Standing: ${playerData.standings}</p>
@@ -309,17 +312,28 @@ function displayPopup(playerData) {
     <p>Birthdate: ${playerData.birthdate}</p>
     <!-- Add more data as needed -->
   `;
-
+  closePopup.innerHTML += 'X';
   popupContent.appendChild(imageContainer);
   popupContent.appendChild(dataContainer);
+  popupContent.appendChild(closePopup);
 
   popupContainer.appendChild(popupContent);
   document.body.appendChild(popupContainer)
-  
+ 
   popupContainer.addEventListener('click', (event) => {
       if (event.target === popupContainer) {
         document.body.removeChild(popupContainer);
       }
   });
+  popupContent.addEventListener('click', (event) => {
+    if (event.target === closePopup) {
+      document.body.removeChild(popupContainer);
+    }
+  });
+  const closePopupButton = document.getElementById('close-popup-button');
+
+  // closePopupButton.addEventListener('click', (event) => {
+  //   console.log(1);
+  // });
 }
 populatePlayerTable();
